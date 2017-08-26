@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <disabledAdministrativeMonitors>
+    <string>jenkins.security.RekeySecretAdminMonitor</string>
+    <string>hudsonHomeIsFull</string>
+    <string>hudson.diagnosis.ReverseProxySetupMonitor</string>
+    <string>jenkins.security.s2m.MasterKillSwitchWarning</string>
+    <string>jenkins.CLI</string>
+    <string>OldData</string>
+  </disabledAdministrativeMonitors>
+  <version>2.72</version>
+  <numExecutors>2</numExecutors>
+  <mode>NORMAL</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:mon2</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:mon2</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains:mon2</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:mon2</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:mon2</permission>
+    <permission>hudson.model.Computer.Build:anonymous</permission>
+    <permission>hudson.model.Computer.Configure:mon2</permission>
+    <permission>hudson.model.Computer.Connect:mon2</permission>
+    <permission>hudson.model.Computer.Create:mon2</permission>
+    <permission>hudson.model.Computer.Delete:mon2</permission>
+    <permission>hudson.model.Computer.Disconnect:mon2</permission>
+    <permission>hudson.model.Hudson.Administer:mon2</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:mon2</permission>
+    <permission>hudson.model.Hudson.Read:mon2</permission>
+    <permission>hudson.model.Hudson.RunScripts:mon2</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:mon2</permission>
+    <permission>hudson.model.Item.Build:mon2</permission>
+    <permission>hudson.model.Item.Cancel:mon2</permission>
+    <permission>hudson.model.Item.Configure:mon2</permission>
+    <permission>hudson.model.Item.Create:mon2</permission>
+    <permission>hudson.model.Item.Delete:mon2</permission>
+    <permission>hudson.model.Item.Discover:mon2</permission>
+    <permission>hudson.model.Item.Read:mon2</permission>
+    <permission>hudson.model.Item.Workspace:mon2</permission>
+    <permission>hudson.model.Run.Delete:mon2</permission>
+    <permission>hudson.model.Run.Update:mon2</permission>
+    <permission>hudson.model.View.Configure:mon2</permission>
+    <permission>hudson.model.View.Create:mon2</permission>
+    <permission>hudson.model.View.Delete:mon2</permission>
+    <permission>hudson.model.View.Read:mon2</permission>
+    <permission>hudson.scm.SCM.Tag:mon2</permission>
+  </authorizationStrategy>
+  <securityRealm class="hudson.security.PAMSecurityRealm" plugin="pam-auth@1.3">
+    <serviceName>sshd</serviceName>
+  </securityRealm>
+  <disableRememberMe>false</disableRememberMe>
+  <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
+  <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
+  <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter" plugin="antisamy-markup-formatter@1.5">
+    <disableSyntaxHighlighting>false</disableSyntaxHighlighting>
+  </markupFormatter>
+  <jdks>
+    <jdk>
+      <name>Java1.8</name>
+      <home>/usr/lib/jvm/java-8-oracle</home>
+      <properties/>
+    </jdk>
+  </jdks>
+  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+  <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
+  <clouds/>
+  <quietPeriod>5</quietPeriod>
+  <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+  <views>
+    <hudson.model.AllView>
+      <owner class="hudson" reference="../../.."/>
+      <name>all</name>
+      <description>Jenkins Build Server</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+    </hudson.model.AllView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>InvoiceBinder Builds</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>invoicebinder</string>
+        <string>invoicebinder-deployer</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.2"/>
+      </columns>
+      <recurse>false</recurse>
+    </listView>
+  </views>
+  <primaryView>all</primaryView>
+  <slaveAgentPort>0</slaveAgentPort>
+  <label></label>
+  <nodeProperties/>
+  <globalNodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents/>
+        <tree-map>
+          <default>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </default>
+          <int>4</int>
+          <string>BUILD_DEPLOYMENT_FOLDER</string>
+          <string>/home/mon2/builds</string>
+          <string>BUILD_DEPLOYMENT_LATEST</string>
+          <string>/home/mon2/builds/latest</string>
+          <string>JAVA_HOME</string>
+          <string>/usr/lib/jvm/java-8-oracle/</string>
+          <string>TOMCAT_WEBAPPS</string>
+          <string>/var/lib/tomcat8/webapps</string>
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+  </globalNodeProperties>
+</hudson>

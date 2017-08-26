@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jenkins.security.UpdateSiteWarningsConfiguration>
+  <ignoredWarnings>
+    <string>SECURITY-257</string>
+    <string>SECURITY-445</string>
+    <string>SECURITY-303</string>
+    <string>SECURITY-410-matrix-auth</string>
+    <string>SECURITY-538</string>
+    <string>SECURITY-528</string>
+    <string>SECURITY-294</string>
+    <string>SECURITY-462</string>
+    <string>SECURITY-365</string>
+    <string>SECURITY-333</string>
+    <string>SECURITY-366</string>
+    <string>SECURITY-372-mailer</string>
+    <string>SECURITY-334</string>
+    <string>SECURITY-367</string>
+    <string>SECURITY-161</string>
+    <string>JENKINS-21436</string>
+    <string>SECURITY-372-email-ext</string>
+  </ignoredWarnings>
+</jenkins.security.UpdateSiteWarningsConfiguration>

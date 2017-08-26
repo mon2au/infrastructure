@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This project deploys the bmg-soft.com website.&#xd;
+Requirements.&#xd;
+1. The user (e.g mon2) running the publish over SSH must have permissions to the /var/www folder.&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>SSH_USER</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>mon2</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>SSH_SERVER</name>
+          <description>ssh servername</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>bmgsoft</string>
+              <string>bmgsoftuat</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BUILD_BRANCH</name>
+          <description>which branch to build</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>master</string>
+              <string>integration</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>DEPLOY_PATH</name>
+          <description>which path to deploy to.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>/var/www</string>
+              <string>/var/www/bmg-soft</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#add host key for server in the build machine
+mkdir -p ~/.ssh
+ssh-keyscan -H $SSH_SERVER &gt;&gt; ~/.ssh/known_hosts 
+
+#cleanup folder
+ssh $SSH_USER@$SSH_SERVER &quot;rm -Rf  $DEPLOY_PATH/*&quot;
+
+#secure copy website.
+scp -r bmg-soft/* $SSH_USER@$SSH_SERVER:$DEPLOY_PATH</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
