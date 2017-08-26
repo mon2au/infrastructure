@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.zanox.hudson.plugins.FTPPublisher_-DescriptorImpl plugin="ftppublisher@1.2-h-1">
+  <sites>
+    <com.zanox.hudson.plugins.FTPSite>
+      <profileName>localhost</profileName>
+      <hostname>localhost</hostname>
+      <timeOut>0</timeOut>
+      <port>21</port>
+      <username>mon2</username>
+      <password>2c4ukb11</password>
+      <ftpDir>Builds</ftpDir>
+    </com.zanox.hudson.plugins.FTPSite>
+  </sites>
+  <flattenFilesSelectedByDefault>true</flattenFilesSelectedByDefault>
+</com.zanox.hudson.plugins.FTPPublisher_-DescriptorImpl>

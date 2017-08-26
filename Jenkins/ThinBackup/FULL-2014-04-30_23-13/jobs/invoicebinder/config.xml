@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<matrix-project plugin="matrix-project@1.0-beta-1">
+  <actions/>
+  <description>InvoiceBinder Build Project&lt;br/&gt;&lt;br/&gt;&#xd;
+Important - BUILD_TYPE parameter must be - &quot;dev&quot;, &quot;uat&quot; or &quot;prod&quot; &lt;br/&gt;&lt;br/&gt;&#xd;
+Important - BUILD_BRANCH parameter must be - &quot;master&quot; or &quot;integration&quot; &lt;br/&gt;&lt;br/&gt;&#xd;
+1. builds glassboxcore (dependency)&lt;br/&gt;&#xd;
+2. builds webinvoice&lt;br/&gt;&#xd;
+3. builds webinvoicesignup&lt;br/&gt;&#xd;
+4. copies the war&apos;s for webinvoice and webinvoicesignup to builds folder.&lt;br/&gt;&#xd;
+5. email build result&lt;br/&gt;&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>10</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BUILD_TYPE</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>dev</string>
+              <string>uat</string>
+              <string>prod</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.plugins.validating__string__parameter.ValidatingStringParameterDefinition plugin="validating-string-parameter@2.2">
+          <name>BUILD_VERSION_MAJOR</name>
+          <description></description>
+          <defaultValue>1</defaultValue>
+          <regex>^(0|[1-9][0-9]*)$</regex>
+          <failedValidationMessage>Only numeric values are allowed for BUILD_VERSION_MAJOR.</failedValidationMessage>
+        </hudson.plugins.validating__string__parameter.ValidatingStringParameterDefinition>
+        <hudson.plugins.validating__string__parameter.ValidatingStringParameterDefinition plugin="validating-string-parameter@2.2">
+          <name>BUILD_VERSION_MINOR</name>
+          <description></description>
+          <defaultValue>1</defaultValue>
+          <regex>^(0|[1-9][0-9]*)$</regex>
+          <failedValidationMessage>Only numeric values are allowed BUILD_VERSION_MINOR.</failedValidationMessage>
+        </hudson.plugins.validating__string__parameter.ValidatingStringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BUILD_BRANCH</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>master</string>
+              <string>integration</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <com.seitenbau.jenkins.plugins.dynamicparameter.StringParameterDefinition plugin="dynamicparameter@0.2.0">
+          <name>CURRENT_DATE</name>
+          <description></description>
+          <__uuid>ebaacd7e-a3d2-4080-a020-6f4528a4d995</__uuid>
+          <__remote>false</__remote>
+          <__script>new Date()</__script>
+          <__localBaseDirectory serialization="custom">
+            <hudson.FilePath>
+              <default>
+                <remote>/var/lib/jenkins/dynamic_parameter/classpath</remote>
+              </default>
+              <boolean>true</boolean>
+            </hudson.FilePath>
+          </__localBaseDirectory>
+          <__remoteBaseDirectory>dynamic_parameter_classpath</__remoteBaseDirectory>
+          <__classPath></__classPath>
+          <readonlyInputField>true</readonlyInputField>
+        </com.seitenbau.jenkins.plugins.dynamicparameter.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.23"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0.3">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://manssster@bitbucket.org/manssster/development.git</url>
+        <credentialsId>d05e6ce1-32f4-428b-a930-cb935424c977</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>**</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>$BUILD_BRANCH</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <authToken>286a9fc7-1438-4632-a08f-cbcd6ce68f8f</authToken>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <axes/>
+  <builders>
+    <hudson.tasks.Maven>
+      <targets>package
+install</targets>
+      <mavenName>/usr/bin/mvn</mavenName>
+      <pom>glassboxcore/glassboxcore/pom.xml</pom>
+      <properties>#This is the glassboxcore project with all the core library features and functionalities.</properties>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Maven>
+      <targets>package
+install</targets>
+      <mavenName>/usr/bin/mvn</mavenName>
+      <pom>glassboxcommon/commondb/pom.xml</pom>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+mvn install:install-file -Dfile=webinvoice/WebInvoice/lib/spring4gwt-0.0.1.jar -DgroupId=com.google.code -DartifactId=spring4gwt -Dversion=0.0.1 -Dpackaging=jar
+mvn install:install-file -Dfile=webinvoice/WebInvoice/lib/gwt-visualization.jar -DgroupId=com.google.gwt.google-apis -DartifactId=gwt-visualization -Dversion=1.1.2 -Dpackaging=jar</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Maven>
+      <targets>package -P$BUILD_TYPE</targets>
+      <mavenName>/usr/bin/mvn</mavenName>
+      <pom>webinvoice/WebInvoice/pom.xml</pom>
+      <properties>buildVersion=${BUILD_VERSION_NUMBER}
+buildDate=${CURRENT_DATE}</properties>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Maven>
+      <targets>package -P$BUILD_TYPE</targets>
+      <mavenName>/usr/bin/mvn</mavenName>
+      <pom>webinvoice/WebInvoiceSignUp/pom.xml</pom>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>mkdir -p &quot;$BUILD_DEPLOYMENT_FOLDER/invoicebinder ($BUILD_TYPE)/$BUILD_VERSION_NUMBER&quot;
+mkdir -p &quot;$BUILD_DEPLOYMENT_LATEST/$BUILD_TYPE&quot;
+
+cp webinvoice/WebInvoice/target/webinvoice.war &quot;$BUILD_DEPLOYMENT_FOLDER/invoicebinder ($BUILD_TYPE)/$BUILD_VERSION_NUMBER&quot;
+cp webinvoice/WebInvoiceSignUp/target/ROOT.war &quot;$BUILD_DEPLOYMENT_FOLDER/invoicebinder ($BUILD_TYPE)/$BUILD_VERSION_NUMBER&quot;
+
+cp -f webinvoice/WebInvoice/target/webinvoice.war &quot;$BUILD_DEPLOYMENT_LATEST/$BUILD_TYPE&quot;
+cp -f webinvoice/WebInvoiceSignUp/target/ROOT.war &quot;$BUILD_DEPLOYMENT_LATEST/$BUILD_TYPE&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.Mailer plugin="mailer@1.8">
+      <recipients>bmgsoftware@gmail.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
+      <recipientList>bmgsoftware@gmail.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+      </configuredTriggers>
+      <contentType>text/html</contentType>
+      <defaultSubject>Build Results (InvoiceBinder) SUCCESS - Build  = ${ENV, var=&quot;BUILD_VERSION_MAJOR&quot;}.${ENV, var=&quot;BUILD_VERSION_MINOR&quot;}.${ENV, var=&quot;BUILD_NUMBER&quot;}, Build Type = $BUILD_TYPE</defaultSubject>
+      <defaultContent>InvoiceBinder build ${ENV, var=&quot;BUILD_VERSION_MAJOR&quot;}.${ENV, var=&quot;BUILD_VERSION_MINOR&quot;}.${ENV, var=&quot;BUILD_NUMBER&quot;} has completed with status SUCCESS.&lt;br/&gt;&lt;br/&gt;
+This build is for configuration ($BUILD_TYPE)&lt;br/&gt;
+The new build is available at &lt;a href=&quot;file:///$BUILD_DEPLOYMENT_FOLDER&quot;&gt;file:///$BUILD_DEPLOYMENT_FOLDER&lt;/a&gt;&lt;br/&gt;
+Please see the attached build log file for more information.&lt;br/&gt;&lt;br/&gt;
+Regards,&lt;br/&gt;
+Build Machine (Jenkins)&lt;br/&gt;</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <attachBuildLog>true</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo></replyTo>
+      <saveOutput>false</saveOutput>
+      <matrixTriggerMode>ONLY_PARENT</matrixTriggerMode>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <org.jvnet.hudson.tools.versionnumber.VersionNumberBuilder plugin="versionnumber@1.4.1">
+      <versionNumberString>${BUILD_VERSION_MAJOR}.${BUILD_VERSION_MINOR}.${BUILD_NUMBER}</versionNumberString>
+      <projectStartDate>1969-12-31 14:00:00.0 UTC</projectStartDate>
+      <environmentVariableName>BUILD_VERSION_NUMBER</environmentVariableName>
+      <oBuildsToday>-1</oBuildsToday>
+      <oBuildsThisMonth>-1</oBuildsThisMonth>
+      <oBuildsThisYear>-1</oBuildsThisYear>
+      <oBuildsAllTime>-1</oBuildsAllTime>
+      <skipFailedBuilds>false</skipFailedBuilds>
+      <useAsBuildDisplayName>true</useAsBuildDisplayName>
+    </org.jvnet.hudson.tools.versionnumber.VersionNumberBuilder>
+  </buildWrappers>
+  <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+  </executionStrategy>
+</matrix-project>

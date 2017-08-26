@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.disk__usage.ProjectDiskUsage plugin="disk-usage@0.28">
+  <diskUsageWithoutBuilds>15359</diskUsageWithoutBuilds>
+  <slaveWorkspacesUsage class="concurrent-hash-map">
+    <entry>
+      <string></string>
+      <concurrent-hash-map>
+        <entry>
+          <string>/var/lib/jenkins/jobs/standalone invoicebinder/workspace/default</string>
+          <long>719364964</long>
+        </entry>
+      </concurrent-hash-map>
+    </entry>
+  </slaveWorkspacesUsage>
+  <buildDiskUsage class="java.util.concurrent.CopyOnWriteArraySet">
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>418</id>
+      <timestamp>1498216699882</timestamp>
+      <number>418</number>
+      <size>12985</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>419</id>
+      <timestamp>1498222576050</timestamp>
+      <number>419</number>
+      <size>13950</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>420</id>
+      <timestamp>1498223846449</timestamp>
+      <number>420</number>
+      <size>16484</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>421</id>
+      <timestamp>1498224401573</timestamp>
+      <number>421</number>
+      <size>2520652</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>422</id>
+      <timestamp>1498226102135</timestamp>
+      <number>422</number>
+      <size>38652</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>423</id>
+      <timestamp>1498227552521</timestamp>
+      <number>423</number>
+      <size>39929</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>424</id>
+      <timestamp>1498229218573</timestamp>
+      <number>424</number>
+      <size>45001</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+    <hudson.plugins.disk__usage.DiskUsageBuildInformation>
+      <id>425</id>
+      <timestamp>1498231936769</timestamp>
+      <number>425</number>
+      <size>45264</size>
+    </hudson.plugins.disk__usage.DiskUsageBuildInformation>
+  </buildDiskUsage>
+  <allBuildsLoaded>false</allBuildsLoaded>
+</hudson.plugins.disk__usage.ProjectDiskUsage>

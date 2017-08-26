@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Icon[en_AU]=/
+Name[en_AU]=SSH on Taurus
+Exec=/usr/bin/ssh -l root 192.168.0.101
+Name=SSH on Taurus
+Icon=/

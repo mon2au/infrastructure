@@ -1,0 +1,35 @@
+PROD SERVER SETUP
+
+Host Config
+#. Change root login.
+#. Add hostname = /etc/hostname
+#. create mon2 user = sudo useradd -m mon2
+#. add user to sudo group = sudo usermod -aG sudo mon2
+#. change password for mon2 user = sudo passwd mon2
+
+Firewall & Security
+#. Install ufw = sudo apt-get install ufw
+#. Default deny incoming = sudo ufw default deny incoming
+#. Default deny outgoing = sudo ufw default allow outgoing (otherwise nothing will work)
+#. Allow ssh from home = sudo ufw allow from 14.200.28.4 to any port 22
+#. Allow mysql from build server = sudo ufw allow from 10.128.163.245 to any port 3306
+#. Allow ssh from build server = sudo ufw allow from 10.128.163.245 to any port 22
+#. Allow tomcat from build machine = sudo ufw allow from 10.128.163.245 to any port 8080
+#. install fail2ban = sudo apt-get install fail2ban
+
+MySql
+# grant priveleges to db user. = GRANT ALL PRIVILEGES ON *.* TO  'user'@'server'  IDENTIFIED  BY  'password';
+# comment bind-address in my.cnf to allow connections from other hosts.
+
+Tomcat
+#. Install tomcat7 = sudo apt-get install tomcat7
+
+Static IP Address Example 
+##
+auto eth0
+iface eth0 inet static
+   address 10.0.2.15
+   netmask 255.255.255.0
+   network 10.0.2.0
+   gateway 10.0.2.1
+   dns-nameservers 203.12.160.35, 203.12.160.36

@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>&gt; Deploy war file to tomcat instance. based on the BUILD_TYPE&lt;br/&gt;&#xd;
+&gt; Please note deployment can be done to DEV, UAT or PROD environment.&lt;br/&gt;&#xd;
+&gt; BUILD_TYPE parameter must be &quot;dev&quot;, &quot;uat&quot; or &quot;prod&quot;&lt;br/&gt;&#xd;
+&gt; Deployment wars are picked up from the latest invoicebinder build.&lt;br/&gt;&lt;br/&gt;&#xd;
+[Process]&lt;br/&gt; &#xd;
+1. deploy ROOT war. (webinvoicesignup) &lt;br/&gt;&#xd;
+2. deploy webinvoice war.&lt;br/&gt;&#xd;
+&#xd;
+&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>10</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BUILD_TYPE</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>dev</string>
+              <string>uat</string>
+              <string>prod</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>ADMIN_PASSWD</name>
+          <description></description>
+          <defaultValue>bq+VkF1zC8gwRUOFZez8XJwUKh63OboL5v3Gxeo63j4=</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ADMIN_USER</name>
+          <description></description>
+          <defaultValue>mon2</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>TOMCAT_SERVER</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>localhost</string>
+              <string>aquarius</string>
+              <string>gemini</string>
+              <string>mon2uat</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>TOMCAT_PASSWD</name>
+          <description></description>
+          <defaultValue>LvAIVCRFUyJmj7KbIl2q6iCyJEuLc/uF7JOUVYaClyc=</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>APP_FOLDER</name>
+          <description></description>
+          <defaultValue>/var/lib/tomcat7/webapps</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.23"/>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <authToken>99e5fc2b-fc44-4b01-a805-a6ff1ae3292b</authToken>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#1. add host key for jenkins in the build machine
+mkdir -p ~/.ssh
+ssh-keyscan -H $TOMCAT_SERVER &gt;&gt; ~/.ssh/known_hosts 
+
+#2. cleanup old applications.
+ssh $ADMIN_USER@$TOMCAT_SERVER &quot;echo $ADMIN_PASSWD | sudo -S rm -f -R $APP_FOLDER/ROOT&quot;
+ssh $ADMIN_USER@$TOMCAT_SERVER &quot;echo $ADMIN_PASSWD | sudo -S rm -f -R $APP_FOLDER/ROOT.war&quot;
+ssh $ADMIN_USER@$TOMCAT_SERVER &quot;echo $ADMIN_PASSWD | sudo -S rm -f -R $APP_FOLDER/demo&quot;
+ssh $ADMIN_USER@$TOMCAT_SERVER &quot;echo $ADMIN_PASSWD | sudo -S rm -f -R $APP_FOLDER/demo.war&quot;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#1. add host key for jenkins in the build machine
+mkdir -p ~/.ssh
+ssh-keyscan -H $TOMCAT_SERVER &gt;&gt; ~/.ssh/known_hosts 
+
+#2. deploy ROOT application 
+curl -T - -u tomcat:$TOMCAT_PASSWD &quot;http://$TOMCAT_SERVER:8080/manager/text/deploy?update=true&amp;path=/&quot; &lt; $BUILD_DEPLOYMENT_LATEST/$BUILD_TYPE/ROOT.war
+
+#3. deploy DEMO application
+curl -T - -u tomcat:$TOMCAT_PASSWD &quot;http://$TOMCAT_SERVER:8080/manager/text/deploy?update=true&amp;path=/demo&quot; &lt; $BUILD_DEPLOYMENT_LATEST/$BUILD_TYPE/webinvoice.war</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#Deploy and extract root application.
+#grant permissions to root application.
+ssh $ADMIN_USER@$TOMCAT_SERVER &quot;echo $ADMIN_PASSWD | sudo -S chmod 777 $APP_FOLDER/ROOT&quot;
+
+#copy webinvoice application.
+scp $BUILD_DEPLOYMENT_LATEST/$BUILD_TYPE/webinvoice.war $ADMIN_USER@$TOMCAT_SERVER:$APP_FOLDER/ROOT
+
+#extract webinvoice application.
+ssh $ADMIN_USER@$TOMCAT_SERVER &quot;echo $ADMIN_PASSWD | sudo -S unzip $APP_FOLDER/ROOT/webinvoice.war -d $APP_FOLDER/ROOT/webinvoice&quot;
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2.2">
+      <recipientList>bmgsoftware@gmail.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>false</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+      </configuredTriggers>
+      <contentType>text/html</contentType>
+      <defaultSubject>Deployment Results (InvoiceBinder) SUCCESS - Build = ${ENV, var=&quot;BUILD_VERSION_MAJOR&quot;}.${ENV, var=&quot;BUILD_VERSION_MINOR&quot;}.${ENV, var=&quot;BUILD_NUMBER&quot;}, Build Type = $BUILD_TYPE</defaultSubject>
+      <defaultContent>InvoiceBinder build ${ENV, var=&quot;BUILD_VERSION_MAJOR&quot;}.${ENV, var=&quot;BUILD_VERSION_MINOR&quot;}.${ENV, var=&quot;BUILD_NUMBER&quot;} has been deployed successfully.
+
+This deployment is for configuration $BUILD_TYPE
+
+Regards,
+Builder (Jenkins)</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <attachBuildLog>true</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

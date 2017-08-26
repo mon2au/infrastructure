@@ -1,0 +1,9 @@
+#You can view your existing cron jobs with the command:
+#crontab -l
+#You can export it to a text file by piping the output:
+#crontab -l > cron
+#You can import your cron jobs from a file (overwriting your existing cronjobs):
+#crontab cron
+
+30 5 * * * echo "2c4ukb11" | sudo -S shutdown -h 0 # JOB_ID_2
+0 5 * * * sh ./Projects/BitBucket/Infrastructure/Jenkins/Build\ Triggers/invoicebinder_devbuild.sh # JOB_ID_3

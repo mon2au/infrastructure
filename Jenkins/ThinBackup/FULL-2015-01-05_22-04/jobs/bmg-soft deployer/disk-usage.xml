@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.disk__usage.ProjectDiskUsage plugin="disk-usage@0.23">
+  <diskUsageWithoutBuilds>671137314</diskUsageWithoutBuilds>
+  <slaveWorkspacesUsage class="concurrent-hash-map">
+    <entry>
+      <string></string>
+      <concurrent-hash-map>
+        <entry>
+          <string>/var/lib/jenkins/jobs/bmg-soft deployer/workspace</string>
+          <long>671124867</long>
+        </entry>
+      </concurrent-hash-map>
+    </entry>
+  </slaveWorkspacesUsage>
+</hudson.plugins.disk__usage.ProjectDiskUsage>

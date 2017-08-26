@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Manpreet Sushil</fullName>
+  <properties>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName>All</primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>fUlwoq:5cbf459e7f896e0fb6cee2021650d377b6dbc61bb9e114e4df08084aa38093e7</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>bmgsoftware@gmail.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

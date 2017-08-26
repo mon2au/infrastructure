@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>mon2</fullName>
+  <properties>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>RoDZ9Eub9uTyZW8Gkg1RrGBNvkeWIC17CJl+TU3Mx21QEo8+T6ZshtFzEcfDt/2jvB/rs/AsHZXf10KlE7d8e5CgkE68lCaNJTTTKQHwUSyW5gus8UTFZrKhfYbuQ6wwmlC9FPA3Oms0mrGiS5HYEJwUKh63OboL5v3Gxeo63j4=</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.12">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
+      <emailAddress>mon2@mon2home</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>jenkins</string>
+        <string>sudo</string>
+        <string>mon2</string>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1401195762539</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+  </properties>
+</user>

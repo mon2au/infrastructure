@@ -1,0 +1,24 @@
+FIREWALL KNOWLEDGE BASE
+
+Install ufw firewall
+    sudo apt-get install ufw
+
+Setup Defaults	
+    Default deny incoming = sudo ufw default deny incoming
+    Default deny outgoing = sudo ufw default allow outgoing (otherwise nothing will work)
+
+Setup SSH Access	
+    Allow ssh from home = sudo ufw allow from 14.200.28.4 to any port 22
+    Allow ssh from build server = sudo ufw allow from 10.128.163.245 to any port 22
+	
+Setup MySQL Access	
+    Allow mysql from build server = sudo ufw allow from 10.128.163.245 to any port 3306
+	
+Setup Tomcat	
+    Allow tomcat from build machine = sudo ufw allow from 10.128.163.245 to any port 8080
+	
+Show numbered status	
+    sudo ufw status numbered
+	
+Delete numbered rule
+    sudo ufw delete #	110.143.224.90

@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Icon[en_AU]=/
+Name[en_AU]=SSH on Virgo
+Exec=/usr/bin/ssh -l root 192.168.0.100
+Name=SSH on Virgo
+Icon=/

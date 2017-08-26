@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>mon2</fullName>
+  <properties>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>3U+hDrB5zOI6UxeEQzd4naCbWKIRKMD/rF5kKGxnozrmyY+ffrucPcjlwedYKw9tdLS08+We9IgglrE/UVaCSKUffDk0ruBtrerzTvkhvoM=</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.9.4">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.6">
+      <emailAddress>mon2@mon2home</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>sambashare</string>
+        <string>tomcat7</string>
+        <string>dip</string>
+        <string>lpadmin</string>
+        <string>cdrom</string>
+        <string>adm</string>
+        <string>sudo</string>
+        <string>mon2</string>
+        <string>plugdev</string>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1397748436384</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+  </properties>
+</user>

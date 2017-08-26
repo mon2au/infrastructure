@@ -1,0 +1,12 @@
+
+
+Database Command: mysqldump -A -u root -p2c4ukb11 > /tmp/gbox_2013_04_26.sql
+
+Web Command: cp -r /var/www/sites /tmp/gbox_www
+
+Web Command: cp -r /var/www/glassbox /tmp/gbox_www
+
+Zip Command: tar cvzf /tmp/gbox_2013_04_26.tar.gz /tmp/gbox_2013_04_26.sql /tmp/gbox_www
+
+tar: Removing leading `/' from member names
+

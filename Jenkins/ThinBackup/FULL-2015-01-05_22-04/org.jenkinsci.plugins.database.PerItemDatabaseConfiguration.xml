@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.database.PerItemDatabaseConfiguration plugin="database@1.3"/>
